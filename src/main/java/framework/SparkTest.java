@@ -19,8 +19,8 @@ import java.util.*;
 @Listeners({SuiteListener.class}) // Add listener to get name of the XML test suite
 public class SparkTest {
     /** === Thread safe variables and their getters (tests methods run in parallel) === */
-    private final static ThreadLocal<ExtentTest> testMethod = new ThreadLocal<>();
-    private ExtentTest getTestMethod() {return testMethod.get();}
+    private final static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
+    private ExtentTest getTest() {return test.get();}
 
     /** === Constants === */
     final String FS = File.separator; // System dependent file separator (so tests can run on Windows or Mac)
@@ -63,21 +63,21 @@ public class SparkTest {
     @BeforeMethod(dependsOnMethods = {"launchApp"})
     protected void createTestEntry(ITestResult result) {
         // I consider each test method a "Test"
-        String className = result.getMethod().getRealClass().getName(); // The real class where the test method was declared
-        String methodName = result.getMethod().getMethodName();
+        String testClass = result.getMethod().getRealClass().getName(); // The real class where the test method was declared
+        String testName = result.getMethod().getMethodName();
 
-        // Each thread gets its own Test
-        testMethod.set(report.createTest(className + "_" + methodName));
+        // Each thread gets its own ExtentTest object
+        test.set(report.createTest(testClass + "_" + testName));
     }
 
     @AfterMethod()
     protected void listenForResult(ITestResult result) throws IOException {
-        ExtentTest testMethod = getTestMethod();
+        ExtentTest test = getTest();
         if (result.getStatus() == ITestResult.FAILURE) {
             String relativePathToScreenshot = SparkDriver.takeErrorScreenshot(result); // Needs relative path from project directory
-            testMethod.fail(result.getThrowable()).addScreenCaptureFromPath(relativePathToScreenshot);
+            test.fail(result.getThrowable()).addScreenCaptureFromPath(relativePathToScreenshot);
         } else {
-            testMethod.log(Status.PASS, "Success");
+            test.log(Status.PASS, "Success");
         }
     }
 

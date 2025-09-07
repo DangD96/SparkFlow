@@ -50,8 +50,4 @@ public class Assert extends org.testng.Assert {
     public static <T> void equals(T actual, T expected, String msg) {
         assertEquals(actual, expected, msg);
     }
-
-    public static void intentionalFail() {
-        fail();
-    }
 }

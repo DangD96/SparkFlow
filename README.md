@@ -125,4 +125,4 @@ _Guidelines for use:_
 * In your `*Test.java` class, find the @Test method you want to use the Data Provider on and link it to your Data Provider method by using the `dataProvider` parameter and specifying the name of your method from the step above.
 * Update your test method's parameters so it only takes a single parameter of type `HashMap<String, String>`. I called this parameter `input`.
 * Now, in your test method body, whenever you want to use your test data, call `input.get(<json key name of the data you want>)`.
-> **Note:** See `src/test/java/LoginTest.java` for an example.
+> **Note:** See `src/test/java/LoginTests.java` for an example.

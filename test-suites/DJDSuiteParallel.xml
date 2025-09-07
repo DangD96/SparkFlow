@@ -3,12 +3,12 @@
 <suite name="DJD Suite with Parallel Methods" parallel="methods" thread-count="10">
     <test verbose="2" name="Logging In" enabled="true">
         <classes>
-            <class name="LoginTest"/>
+            <class name="LoginTests"/>
         </classes>
     </test>
     <test verbose="2" name="Adding Product to Cart" enabled="false">
         <classes>
-            <class name="ProductTest"/>
+            <class name="ProductTests"/>
         </classes>
     </test>
 </suite>

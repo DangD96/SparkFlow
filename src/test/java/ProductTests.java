@@ -6,9 +6,9 @@ import pages.CatalogPage;
 import pages.LoginPage;
 import pages.ShoppingCartPage;
 
-public class ProductTest extends SparkTest {
+public class ProductTests extends SparkTest {
     @Test(description = "Add correct product to shopping cart")
-    protected void addProductTest() {
+    protected void testAddingProductToCart() {
         LoginPage.login("rahulshettyacademy", "learning", "", "Teacher", true);
         Assert.elementIsVisible(CatalogPage.checkoutBtn());
         Assert.equals(CatalogPage.getNumberOfProducts(), 4);
@@ -33,6 +33,6 @@ public class ProductTest extends SparkTest {
     protected void intentionalFail() throws InterruptedException {
         LoginPage.login("rahulshettyacademy", "learning", "", "Teacher", true);
         Thread.sleep(2000);
-        Assert.intentionalFail();
+        Assert.fail();
     }
 }

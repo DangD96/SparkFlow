@@ -3,12 +3,12 @@
 <suite name="DJD Suite">
     <test verbose="2" name="Logging In">
         <classes>
-            <class name="LoginTest"/>
+            <class name="LoginTests"/>
         </classes>
     </test>
     <test verbose="2" name="Adding Product to Cart">
         <classes>
-            <class name="ProductTest"/>
+            <class name="ProductTests"/>
         </classes>
     </test>
 </suite>
