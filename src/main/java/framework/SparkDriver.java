@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.function.*;
 
+import static framework.Helpers.isPRD;
+
 // Custom static wrapper around common WebDriver behaviors
 public class SparkDriver {
     /** === Thread safe variables and their getters (tests methods run in parallel) === */
@@ -62,7 +64,7 @@ public class SparkDriver {
         // https://peter.sh/experiments/chromium-command-line-switches/
         if (options instanceof ChromiumOptions<?>) {
             ChromiumOptions<?> chromiumOptions = (ChromiumOptions<?>) options;
-            if (Helpers.isPRD()) {
+            if (isPRD()) {
                 // PRD tests will run in GitHub Runner environment, which is headless
                 // Sandboxing has potential to cause issues in CI/CD envs
                 chromiumOptions.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage");
@@ -74,7 +76,7 @@ public class SparkDriver {
         // https://wiki.mozilla.org/Firefox/CommandLineOptions
         if (options instanceof FirefoxOptions) {
             FirefoxOptions firefoxOptions = (FirefoxOptions) options;
-            if (Helpers.isPRD()) {
+            if (isPRD()) {
                 firefoxOptions.addArguments("-headless");
             }
             firefoxOptions.addArguments("-private");
